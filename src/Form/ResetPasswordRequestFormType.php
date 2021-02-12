@@ -16,7 +16,8 @@ class ResetPasswordRequestFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'البريد الإلكتروني'
+                    'placeholder' => 'البريد الإلكتروني',
+                    'class' => 'form-control form-control-user'
                 ],
                 'constraints' => [
                     new NotBlank([

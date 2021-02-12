@@ -15,7 +15,7 @@
                                 <div class="p-5">
                                     <form class="user" method="post">
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">برنامج إدارة المعلمين النواب
+                                            <h1 class="h4 text-gray-900 mb-4">{{ appName }}
                                             </h1>
                                             {{ include('/__inc/notification.html.twig') }}
                                             {% if error %}
@@ -37,8 +37,7 @@
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="" id="Check" name="_remember_me">
                                                 <label class="custom-control-label" for="Check">ذكرني</label>
-                                                <a href="{{ path('app_forgot_password_request') }}" class="float-left">نسيت
-                                                    كلمة المرور؟</a>
+
                                             </div>
                                         </div>
                                         <input type="hidden" name="_csrf_token"
@@ -46,10 +45,11 @@
                                         <input type="submit" class="btn btn-primary btn-user btn-block"
                                                value="تسجيل الدخول">
                                     </form>
-                                    {# <hr> #}
-                                    {# <a href="" #}
-                                    {# class="btn btn-outline-login btn-block"><i class="fab fa-google"></i> #}
-                                    {# تسجيل الدخول عبر Google </a> #}
+                                    <hr>
+                                    <div class="text-center">
+                                        <a href="{{ path('app_forgot_password_request') }}">نسيت
+                                            كلمة المرور؟</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>

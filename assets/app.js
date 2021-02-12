@@ -30,6 +30,7 @@ $('.datepicker').datepicker({
     autoclose: true,
 });
 $('form[name="search_form"]').addClass("float-left col-md-3");
+$('form[name="reset_password_request_form"]').addClass("user");
 // Javascript to enable link to tab
 var url = document.location.toString();
 if (url.match('#')) {
