@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+use App\Entity\Legation;
 use App\Entity\Subscription;
 use App\Repository\LegationRepository;
 use App\Repository\SubscriptionRepository;
@@ -39,5 +40,14 @@ class Info
         /** @var string $offer */
         $offer = $last->getOffer();
         return $offer;
+    }
+
+    public function getRegion(): string
+    {
+        /** @var Legation $legation */
+        $legation = $this->legation->findOneBy(['id' => 1]);
+        /** @var string $region */
+        $region = $legation->getRegion();
+        return $region;
     }
 }

@@ -18,7 +18,7 @@
 <body>
 <div style="text-align: right;">
     <div class="float-left">
-        {{ app.user.legation.region }} في :
+        {{ info.region }} في :
         <input type="text"
                style="border:0;width:120px;direction: rtl;"
                placeholder="أكتب التاريخ"
@@ -27,7 +27,7 @@
     </div>
     الجمهورية التونسية <br>
     وزارة التربية<br>
-    {{ app.user.legation }}<br>
+    {{ info.legation() }}<br>
     إدارة المرحلة الإبتدائية<br>
 </div>
 
@@ -67,12 +67,12 @@
             <td>{{ mission.type ? 'شغور' : 'ظرفية' }}</td>
             <td>{{ mission.newMonth }}</td>
             <td>{{ mission.newDay }}</td>
-            <td>{{ mission.startAt ? mission.startAt|date('d/m/Y') : '' }}</td>
-            <td>{{ mission.endAt ? mission.endAt|date('d/m/Y') : 'لا يوجد' }}</td>
+            <td>{{ mission.startAt ? mission.startAt|date('Y/m/d') : '' }}</td>
+            <td>{{ mission.endAt ? mission.endAt|date('Y/m/d') : '' }}</td>
         </tr>
     {% else %}
         <tr>
-            <td colspan="9" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+            <td colspan="9" class="table-secondary text-center text-gray-800">لا يوجد سجلات!</td>
         </tr>
     {% endfor %}
     </tbody>

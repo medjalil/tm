@@ -25,7 +25,7 @@
 
 <div style="text-align: right;">
     <div style="float: left">
-        {{ mission.teacher.legation.region }} في :
+        {{ info.region }} في :
         <input type="text"
                style="border:0;width:120px;font-family: inherit;direction: rtl;font-size: 24px"
                placeholder="أكتب التاريخ"
@@ -34,12 +34,12 @@
     </div>
     الجمهورية التونسية <br>
     وزارة التربية<br>
-    {{ mission.teacher.legation }}<br>
+    {{ info.legation }}<br>
     إدارة المرحلة الإبتدائية<br>
 </div>
 
 <div style="text-align: center;margin-top: 40px;">
-    <h2>من المندوب الجهوي للتربية ب{{ mission.teacher.legation.region }}</h2>
+    <h2>من المندوب الجهوي للتربية ب{{ info.region }}</h2>
     <h4> إلى السيد(ة): {{ mission.teacher.fullName }}</h4>
 </div>
 <div>

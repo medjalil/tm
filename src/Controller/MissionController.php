@@ -36,39 +36,19 @@ class MissionController extends AbstractController
         } else {
             $results = $missionRepository->findby([], ['id' => 'DESC']);
         }
-//        $entityManager = $this->getDoctrine()->getManager();
-//        if ($request->query->get('search')) {
-//            $query = $entityManager->createQuery(
-//                'SELECT m FROM App:Mission m
-//                JOIN App:Teacher t WITH m.teacher = t.id
-//                JOIN App:City c WITH m.city = c.id
-//                JOIN App:School s WITH m.school = s.id
-//                WHERE ((t.fullName LIKE  :search OR c.name LIKE  :search OR s.name LIKE  :search) AND t.legation = :legation AND t.archived = 0)'
-//            )->setParameter('search', '%' . $request->query->get('search') . '%')->setParameter('legation', $legation);
-//            $results = $query->getResult();
-//        } elseif ($request->query->get('filter') == 'شغور') {
-//            $query = $entityManager->createQuery(
-//                'SELECT m FROM App:Mission m  JOIN App:Teacher t WITH m.teacher = t.id WHERE t.legation = :legation AND t.archived = 0 AND m.type = 1'
-//            )->setParameter('legation', $legation);
-//            $results = $query->getResult();
-//        } elseif ($request->query->get('filter') == 'ظرفية') {
-//            $query = $entityManager->createQuery(
-//                'SELECT m FROM App:Mission m  JOIN App:Teacher t WITH m.teacher = t.id WHERE t.legation = :legation AND t.archived = 0 AND m.type = 0'
-//            )->setParameter('legation', $legation);
-//            $results = $query->getResult();
-//        } else {
-//            $query = $entityManager->createQuery(
-//                'SELECT m FROM App:Mission m  JOIN App:Teacher t WITH m.teacher = t.id WHERE t.legation = :legation AND t.archived = 0'
-//            )->setParameter('legation', $legation);
-//            $results = $query->getResult();
-//        }
+
+        if ($request->query->get('filter') == 'شغور') {
+            $results = $missionRepository->findby(['type' => true], ['id' => 'DESC']);
+        } elseif ($request->query->get('filter') == 'ظرفية') {
+            $results = $missionRepository->findby(['type' => false], ['id' => 'DESC']);
+        }
+
 
         $missions = $paginator->paginate($results, $request->query->getInt('page', 1), 20);
         return $this->render('mission/index.html.twig', [
             'missions' => $missions,
             'form' => $form->createView(),
-            'option' => $request->query->get('filter')
-        ]);
+            'option' => $request->query->get('filter')]);
 
 
     }
@@ -79,7 +59,8 @@ class MissionController extends AbstractController
      * @param Teacher $teacher
      * @return Response
      */
-    public function new(Request $request, Teacher $teacher): Response
+    public
+    function new(Request $request, Teacher $teacher): Response
     {
 
         $mission = new Mission();
