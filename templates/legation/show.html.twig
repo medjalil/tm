@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}المندوبية{% endblock %}
+{% block title_header %}المندوبية{% endblock %}
+
+{% block body %}
+    {% if legation is empty %}
+        <a href="{{ path('legation_new') }}" class="btn btn-primary"><i class="fas fa-plus"></i> إضافة مندوبية </a>
+    {% else %}
+        <table class="table table-striped">
+            <tr>
+                <th>المندوبية</th>
+                <td>{{ legation.name }}</td>
+            </tr>
+            <tr>
+                <th>الهاتف</th>
+                <td>{{ legation.phone }}</td>
+            </tr>
+            <tr>
+                <th>البريد الإلكتروني</th>
+                <td>{{ legation.email|default('غير موجود') }}</td>
+            </tr>
+            <tr>
+                <th>العنوان</th>
+                <td><a data-placement="top" data-toggle="tooltip"
+                       data-original-title="{{ legation.region }}">{{ legation.address|default(legation.region) }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th>تاريخ التسجيل</th>
+                <td>{{ legation.createdAt ? legation.createdAt|date('Y/m/d') : '' }}</td>
+            </tr>
+        </table>
+
+        <a href="{{ path('legation_edit', {'id': legation.id}) }}" class="btn btn-primary">
+            <i class="fas fa-edit"></i> تعديل
+        </a>
+    {% endif %}
+{% endblock %}

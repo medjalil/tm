@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}قائمة الاشراكات{% endblock %}
+{% block title_header %}قائمة الاشراكات{% endblock %}
+
+{% block body %}
+    <a href="{{ path('subscription_new') }}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> إضافة اشراك </a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>العرض</th>
+            <th>تاريخ بداية العرض</th>
+            <th>تاريخ نهاية العرض</th>
+            <th class="end-table"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for subscription in subscriptions %}
+            <tr>
+                <td>{{ subscription.offer }}</td>
+                <td>{{ subscription.startAt ? subscription.startAt|date('Y/m/d') : '' }}</td>
+                <td>{{ subscription.endAt ? subscription.endAt|date('Y/m/d') : '' }}</td>
+                <td>
+                    {% include 'option/_option.html.twig' with { _pathEdit: 'subscription_edit', _pathDelete: 'subscription_delete', id: subscription.id} %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

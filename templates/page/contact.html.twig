@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block title %}إتصل بنا{% endblock %}
+{% block title_header %}إتصل بنا{% endblock %}
+{% block body %}
+
+
+    {{ form_start(form) }}
+    <div class="form-row">
+        <div class="col-6">
+            {{ form_row(form.subject) }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-6">
+            {{ form_row(form.message) }}
+        </div>
+    </div>
+    <button class="btn btn-primary"><i class="fas fa-envelope-open"></i> أرسل</button>
+    {{ form_end(form) }}
+{% endblock %}

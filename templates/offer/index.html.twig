@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}قائمة العروض{% endblock %}
+{% block title_header %}قائمة العروض{% endblock %}
+
+{% block body %}
+    <a href="{{ path('offer_new') }}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> إضافة عرض </a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>عنوان العرض</th>
+            <th>عدد الأشهر</th>
+            <th>المبلغ</th>
+            <th class="end-table"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for offer in offers %}
+            <tr>
+                <td>{{ offer.title }}</td>
+                <td>{{ offer.monthNbr }}</td>
+                <td>
+                    {% if offer.price == 0 %}
+                        <span class="badge badge-success">مجاني</span>
+                    {% else %}
+                        {{ offer.price|format_currency('TND') }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% include 'option/_option.html.twig' with { _pathEdit: 'offer_edit', _pathDelete: 'offer_delete', id: offer.id} %}
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

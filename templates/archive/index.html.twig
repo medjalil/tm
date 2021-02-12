@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}الأرشيف{% endblock %}
+{% block title_header %}الأرشيف{% endblock %}
+
+{% block body %}
+    <div class="clearfix">
+        {{ form(form) }}
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>الاسم و اللقب</th>
+            <th>السبب</th>
+            <th>الملاحظات</th>
+            <th>تاريخ الأرشيف</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for archive in archives %}
+            <tr>
+                <td><a href="{{ path('teacher_show',{'id':archive.teacher.id}) }}">{{ archive.teacher.fullName }}</a>
+                </td>
+                <td>{{ archive.justification }}</td>
+                <td>{{ archive.comment|default('لا توجد') }}</td>
+                <td>{{ archive.archivedAt ? archive.archivedAt|date('Y/m/d') : '' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}تعديل الاشتراك{% endblock %}
+{% block title_header %}تعديل الاشتراك{% endblock %}
+
+{% block body %}
+
+    {{ include('subscription/_form.html.twig', {'button_label': 'تعديل المعطيات'}) }}
+
+{% endblock %}

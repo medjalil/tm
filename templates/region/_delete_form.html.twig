@@ -1,0 +1,22 @@
+<div class="modal fade" id="deleteModal-{{ region.id }}" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form method="post" action="{{ path('region_delete', {'id': region.id}) }}">
+        <input type="hidden" name="_method" value="DELETE">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">تأكيد الحذف</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">هل تريد حذف هذا التسجيل؟</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">إلغاء</button>
+                    <input type="hidden" name="_token" value="{{ csrf_token('option' ~ region.id) }}">
+                    <button class="btn btn-danger"><i class="fas fa-trash"></i> حذف</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

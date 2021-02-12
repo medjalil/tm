@@ -1,0 +1,111 @@
+<style>
+    body {
+        font-size: 24px;
+        direction: rtl;
+    }
+
+    .btn-print {
+        width: 100px;
+        height: 30px;
+        color: #fff;
+        background-color: #e02d1b;
+        border-color: #d52a1a;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: 4px;
+    }
+
+    @media print {
+        .link {
+            display: none;
+        }
+    }
+
+</style>
+
+<div style="text-align: right;">
+    <div style="float: left">
+        {{ mission.teacher.legation.region }} في :
+        <input type="text"
+               style="border:0;width:120px;font-family: inherit;direction: rtl;font-size: 24px"
+               placeholder="أكتب التاريخ"
+               value="{{ "now"|date("Y/m/d") }}"
+        >
+    </div>
+    الجمهورية التونسية <br>
+    وزارة التربية<br>
+    {{ mission.teacher.legation }}<br>
+    إدارة المرحلة الإبتدائية<br>
+</div>
+
+<div style="text-align: center;margin-top: 40px;">
+    <h2>من المندوب الجهوي للتربية ب{{ mission.teacher.legation.region }}</h2>
+    <h4> إلى السيد(ة): {{ mission.teacher.fullName }}</h4>
+</div>
+<div>
+    <p>الموضوع : تكليف بنيابة</p>
+    <p style="word-spacing: 0.5rem;"> المرجع مذكرة وزارة التربية بتاريخ 2013/10/04 تحت عدد 21458</p>
+    <p>وبعد</p>
+    <p>
+        لقد وقع تكليفك بنيابة بصفة وقتية وعرضية
+    </p>
+    <p>
+        بالمدرسة الابتدائية :
+        {{ mission.school }}
+    </p>
+    <p>
+        معتمدية :
+        {{ mission.city }}
+    </p>
+    <p>
+
+        {{ mission.type ? 'شغور' : 'ظرفية' }}
+    </p>
+    <p>
+        بداية من :
+        {{ mission.startAt|date('Y/m/d') }}
+    </p>
+    <p style="text-align: center;">
+        لذا المرغوب منك الاتصال بالسيد مدير المدرسة حالا لمباشرة العمل
+    </p>
+    <p style="text-align: center" class="link">
+        <a href="javascript:window.print()">
+            <button class="btn-print">طباعة</button>
+        </a>
+    </p>
+    <div style="float: left;margin-top: 10px; margin-left: 50px">
+        <p style="text-align: center;">
+            و السلام
+            <br>
+
+            <br>
+            المندوب الجهوي للتربية
+        </p>
+    </div>
+</div>
+{# <table class="table"> #}
+    {# <tbody> #}
+    {# <tr> #}
+    {# <th>Id</th> #}
+    {# <td>{{ mission.id }}</td> #}
+    {# </tr> #}
+    {# <tr> #}
+    {# <th>NewMonth</th> #}
+    {# <td>{{ mission.newMonth }}</td> #}
+    {# </tr> #}
+    {# <tr> #}
+    {# <th>NewDay</th> #}
+    {# <td>{{ mission.newDay }}</td> #}
+    {# </tr> #}
+    {# <tr> #}
+    {# <th>StartAt</th> #}
+    {# <td>{{ mission.startAt ? mission.startAt|date('Y-m-d H:i:s') : '' }}</td> #}
+    {# </tr> #}
+    {# <tr> #}
+    {# <th>EndAt</th> #}
+    {# <td>{{ mission.endAt ? mission.endAt|date('Y-m-d H:i:s') : '' }}</td> #}
+    {# </tr> #}
+    {# </tbody> #}
+    {# </table> #}
+
+

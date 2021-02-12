@@ -1,0 +1,20 @@
+<div class="modal fade" id="disableModal-{{ user.id }}" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form method="post" action="{{ path('user_disable', {'id': user.id}) }}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">تعطيل الحساب</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">هل تريد تعطيل هذا الحساب؟</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">إلغاء</button>
+                    <button class="btn btn-danger"><i class="fas fa-times"></i> تعطيل الحساب</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

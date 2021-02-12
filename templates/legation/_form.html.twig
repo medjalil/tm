@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+<div class="form-row">
+    <div class="col">
+        {{ form_row(form.name) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.phone) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.region) }}
+    </div>
+</div>
+<div class="form-row">
+    <div class="col">
+        {{ form_row(form.address) }}
+    </div>
+</div>
+<button class="btn btn-primary"><i class="fas fa-save"></i> {{ button_label|default('تسجيل') }}</button>
+{{ form_end(form) }}

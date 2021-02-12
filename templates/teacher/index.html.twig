@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}قائمة المعلمين النواب{% endblock %}
+{% block title_header %}قائمة المعلمين النواب{% endblock %}
+
+{% block body %}
+    <div class="clearfix">
+        <a href="{{ path('teacher_new') }}" class="btn btn-primary"><i class="fas fa-plus"></i> إضافة معلم </a>
+        {{ form(form) }}
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>الترتيب</th>
+            <th>الاسم و اللقب</th>
+            <th>ب.ت.و</th>
+            <th>الهاتف</th>
+            <th>الأشهر</th>
+            <th>الأيام</th>
+            <th>المعتمدية</th>
+            <th class="end-table"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for teacher in teachers %}
+            {% set sumMonth = 0 %}
+            {% set sumDay = 0 %}
+            {% set addMonth = 0 %}
+            {% set restDay = 0 %}
+            {% for m in teacher.missions %}
+                {% set sumMonth = sumMonth + m.newMonth %}
+            {% endfor %}
+            {% for m in teacher.missions %}
+                {% set sumDay = sumDay + m.newDay %}
+            {% endfor %}
+            {% set  restDay = (sumDay + teacher.initDay) % 30 %}
+            {% set  addMonth = (sumDay + teacher.initDay) // 30 %}
+
+            <tr>
+                <td>{{ teacher.ord }}</td>
+                <td><a href="{{ path('teacher_show', {'id': teacher.id}) }}">{{ teacher.fullName }}</a></td>
+                <td>{{ teacher.cin }}</td>
+                <td>{{ teacher.phone }}</td>
+                <td> {{ sumMonth + teacher.initMonth + addMonth }}</td>
+                <td>{{ restDay }}</td>
+                <td>{{ teacher.city }}</td>
+                <td>
+                    <a href="{{ path('teacher_edit', {'id': teacher.id}) }}"><i class="fas fa-edit"
+                                                                                data-placement="top"
+                                                                                data-toggle="tooltip"
+                                                                                data-original-title="تعديل"></i></a>
+                    <a href="" data-toggle="modal" data-target="#deleteModal-{{ teacher.id }}"><i class="fas fa-trash"
+                                                                                                  data-toggle="tooltip"
+                                                                                                  data-placement="top"
+                                                                                                  title="حذف"></i></a>
+                </td>
+                {{ include('teacher/_delete_form.html.twig') }}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(teachers) }}
+    </div>
+{% endblock %}

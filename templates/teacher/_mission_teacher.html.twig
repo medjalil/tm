@@ -1,0 +1,77 @@
+{% if(teacher.archived == false) %}
+    <a href="{{ path('mission_new',{'id':teacher.id}) }}" class="btn btn-primary mb-3"><i
+                class="fas fa-plus"></i> إضافة
+        نيابة </a>
+{% endif %}
+<table class="table">
+    <thead>
+    <tr>
+        <th>المؤسسة</th>
+        <th>المعتمدية</th>
+        <th>النوع</th>
+        <th> الأشهر</th>
+        <th> الأيام</th>
+        <th>تاريخ البداية</th>
+        <th>تاريخ النهاية</th>
+        {% if(teacher.archived == false) %}
+            <th></th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for mission in teacher.missions|sort|reverse %}
+        <tr>
+            <td>{{ mission.school }}</td>
+            <td>{{ mission.city }}</td>
+            <td>{{ mission.type ? 'شغور' : 'ظرفية' }}</td>
+            <td>{{ mission.newMonth }}</td>
+            <td>{{ mission.newDay }}</td>
+            <td>{{ mission.startAt ? mission.startAt|date('Y/m/d') : '' }}</td>
+            <td>{{ mission.endAt ? mission.endAt|date('Y/m/d') : '' }}</td>
+            {% if(teacher.archived == false) %}
+                <td>
+                    <a href="{{ path('mission_edit', {'id': mission.id}) }}"><i class="fas fa-edit"
+                                                                                data-toggle="tooltip"
+                                                                                data-original-title="تعديل"></i></a>
+                    <a href="" data-toggle="modal" data-target="#deleteModal-{{ mission.id }}"><i class="fas fa-trash"
+                                                                                                  data-toggle="tooltip"
+                                                                                                  data-placement="top"
+                                                                                                  title="حذف"></i></a>
+                    <a href="{{ path('mission_show',{'id': mission.id}) }}"><i class="fas fa-print"
+                                                                               data-toggle="tooltip"
+                                                                               data-placement="top"
+                                                                               title="طباعة"></i>
+                    </a><a href="{{ path('salary_new',{'id': mission.id}) }}"><i class="fas fa-credit-card"
+                                                                                 data-toggle="tooltip"
+                                                                                 data-placement="top"
+                                                                                 title="تأجير"></i>
+                    </a>
+                </td>
+            {% endif %}
+            {{ include('mission/_delete_form.html.twig') }}
+        </tr>
+        {% for salary in mission.salaries %}
+            <tr class="table-lk">
+                <td> تاريخ البداية:{{ salary.startAt|date('d/m/Y') }}</td>
+                <td colspan="2"> تاريخ النهاية:{{ salary.endAt|date('d/m/Y') }}</td>
+                <td colspan="2"> عدد الأيام المنجزة:{{ salary.days }}</td>
+                <td colspan="2"> المبلغ:{{ salary.amount }} دينار</td>
+                <td>
+                    <a href="{{ path('salary_edit', {'id': salary.id}) }}"><i class="fas fa-edit"
+                                                                              data-toggle="tooltip"
+                                                                              data-original-title="تعديل"></i></a>
+                    <a href="" data-toggle="modal" data-target="#deleteModal-{{ salary.id }}"><i class="fas fa-trash"
+                                                                                                 data-toggle="tooltip"
+                                                                                                 data-placement="top"
+                                                                                                 title="حذف"></i></a>
+                </td>
+                {{ include('salary/_delete_form.html.twig') }}
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="8" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

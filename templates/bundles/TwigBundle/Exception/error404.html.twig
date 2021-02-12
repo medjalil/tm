@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}404 Not Found Page{% endblock %}
+
+{% block body %}
+    <!-- 404 Error Text -->
+    <div class="text-center">
+        <div class="error mx-auto" data-text="404">404</div>
+        <p class="lead text-gray-800 mb-5">الصفحة غير موجودة</p>
+        <p class="text-gray-500 mb-0">يبدو أن هناك خطأ في رابط الصفحة.. تأكد جيدا من الرابط</p>
+        <a href="{{ path('dashboard') }}">&rarr; العودة للوحة التحكم </a>
+    </div>
+{% endblock %}

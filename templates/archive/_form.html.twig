@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+<div class="form-row">
+    <div class="col-6">
+        {{ form_row(form.justification) }}
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-6">
+        {{ form_row(form.comment) }}
+    </div>
+</div>
+<button class="btn btn-primary"><i class="fas fa-save"></i> {{ button_label|default('تسجيل') }}</button>
+{{ form_end(form) }}

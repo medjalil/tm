@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}قائمة المؤسسات العمومية{% endblock %}
+{% block title_header %}قائمة المؤسسات العمومية{% endblock %}
+
+{% block body %}
+    <div class="clearfix">
+        <a href="{{ path('school_new') }}" class="btn btn-primary"><i class="fas fa-plus"></i> إضافة مؤسسة </a>
+        {{ form(form) }}
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>إسم المؤسسة</th>
+            <th>عدد النيابات</th>
+            <th class="end-table"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for school in schools %}
+            <tr>
+                <td>{{ school.name }}</td>
+                <td>{{ school.missions|length }}</td>
+                <td>
+                    {% include 'option/_option.html.twig' with { _pathEdit: 'school_edit', _pathDelete: 'school_delete', id: school.id} %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(schools) }}
+    </div>
+{% endblock %}

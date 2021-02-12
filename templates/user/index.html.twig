@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}قائمة المستخدمين{% endblock %}
+{% block title_header %}قائمة المستخدمين{% endblock %}
+
+{% block body %}
+    <a href="{{ path('user_new') }}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> إضافة مستخدم </a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th>الاسم و اللقب</th>
+            <th>البريد الالكتروني</th>
+            <th>الهاتف</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.enabled ? '<i class="fas fa-circle" style="color:#1cc88a"></i>' : '<i class="fas fa-circle" style="color:#e74a3b"></i>' }}</td>
+                <td><a data-placement="top"
+                       data-toggle="tooltip"
+                       data-original-title="{{ user.registeredAt ? user.registeredAt|date('d/m/Y') : '' }}"
+                    >{{ user.fullName }}</a></td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.mobile }}</td>
+                <td>
+                    {% if user.enabled %}
+                        <a href="" data-toggle="modal" data-target="#disableModal-{{ user.id }}"><i class="fas fa-eye"
+                                                                                                    data-placement="top"
+                                                                                                    data-toggle="tooltip"
+                                                                                                    data-original-title="حساب مفتوح"></i></a>
+                    {% else %}
+                        <a href="" data-toggle="modal" data-target="#enableModal-{{ user.id }}"><i
+                                    class="fas fa-eye-slash"
+                                    data-placement="top"
+                                    data-toggle="tooltip"
+                                    data-original-title="حساب مغلق"></i></a>
+                    {% endif %}
+                    <a href="{{ path('user_change_password', {'id': user.id}) }}"><i class="fas fa-lock"
+                                                                                     data-placement="top"
+                                                                                     data-toggle="tooltip"
+                                                                                     data-original-title="تغير كلمة المرور"></i></a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}"><i class="fas fa-edit"
+                                                                          data-placement="top"
+                                                                          data-toggle="tooltip"
+                                                                          data-original-title="تعديل"></i></a>
+                    <a href="" data-toggle="modal" data-target="#deleteModal-{{ user.id }}"><i class="fas fa-trash"
+                                                                                               data-toggle="tooltip"
+                                                                                               data-placement="top"
+                                                                                               title="حذف"></i></a>
+                </td>
+            </tr>
+            {{ include('user/_delete_form.html.twig') }}
+            {{ include('user/_enable.html.twig') }}
+            {{ include('user/_disable.html.twig') }}
+        {% else %}
+            <tr>
+                <td colspan="6" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

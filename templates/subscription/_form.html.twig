@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+<div class="form-row">
+    <div class="col">
+        {{ form_row(form.legation) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.offer) }}
+    </div>
+</div>
+<div class="form-row">
+    <div class="col">
+        {{ form_row(form.startAt) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.endAt) }}
+    </div>
+</div>
+<button class="btn btn-primary"><i class="fas fa-save"></i> {{ button_label|default('تسجيل') }}</button>
+{{ form_end(form) }}

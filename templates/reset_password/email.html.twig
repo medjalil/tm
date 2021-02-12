@@ -1,0 +1,9 @@
+<div dir="rtl">
+    <p>مرحبا</p>
+    <p>لإعادة تعيين كلمة المرور الخاصة بك ، يرجى زيارة الرابط التالي:</p>
+    <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+    <p>ستنتهي صلاحية هذا الرابط في {{ tokenLifetime|date('i') }} دقيقة. </p>
+
+    <p>شكرا</p>
+</div>

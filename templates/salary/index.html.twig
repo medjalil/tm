@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}قائمة الأجور {% endblock %}
+{% block title_header %}قائمة الأجور {% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>StartAt</th>
+            <th>EndAt</th>
+            <th>Days</th>
+            <th>Amount</th>
+            <th>CreatedAt</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for salary in salaries %}
+            <tr>
+                <td>{{ salary.mission.teacher }}</td>
+                <td>{{ salary.startAt ? salary.startAt|date('Y-m-d') : '' }}</td>
+                <td>{{ salary.endAt ? salary.endAt|date('Y-m-d') : '' }}</td>
+                <td>{{ salary.days }}</td>
+                <td>{{ salary.amount }}</td>
+                <td>{{ salary.createdAt ? salary.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('salary_edit', {'id': salary.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

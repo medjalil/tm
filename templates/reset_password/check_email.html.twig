@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}إعادة تعيين كلمة المرور{% endblock %}
+
+{% block login %}
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row" style="height: 500px;">
+                            <div class="col-lg-6" style="background: #e6effd;">
+                                <div class="p-5 mt-5">
+                                    <center><i class="fas fa-thumbs-up fa-5x" style="color:#3362cc;"></i></center>
+                                    <p class="mt-5">تم إرسال بريد إلكتروني يحتوي على ارتباط يمكنك النقر فوقه لإعادة
+                                        تعيين
+                                        كلمة المرور
+                                        الخاصة بك. ستنتهي صلاحية هذا الرابط خلال
+                                        {{ tokenLifetime|date('i') }} دقيقة.
+                                    </p>
+                                    <p> إذا لم تتلق بريدًا إلكترونيًا ، فيرجى التحقق من مجلد البريد العشوائي أو المحاولة
+                                        <a
+                                                href="{{ path('app_forgot_password_request') }}">مرة أخرى</a>.</p>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a href="{{ path('app_login') }}">العودة إلى تسجيل الدخول</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

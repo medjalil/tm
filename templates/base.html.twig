@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} | {{ appName }}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <link href="{{ asset('favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
+</head>
+<body {% if is_granted('IS_AUTHENTICATED_FULLY') %}id="page-top"
+      {% else %}style="background: rgb(56 72 89);"{% endif %}>
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        {{ include('/__inc/sidebar.html.twig') }}
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                {{ include('/__inc/navbar.html.twig') }}
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    {{ include('/__inc/notification.html.twig') }}
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0">{% block title_header %}{% endblock %}</h1>
+                    </div>
+                    {% block body %}{% endblock %}
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            {{ include('/__inc/footer.html.twig') }}
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+{% else %}
+    {% block login %}{% endblock %}
+{% endif %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>

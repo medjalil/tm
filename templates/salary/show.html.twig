@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salary{% endblock %}
+
+{% block body %}
+    <h1>Salary</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ salary.id }}</td>
+            </tr>
+            <tr>
+                <th>StartAt</th>
+                <td>{{ salary.startAt ? salary.startAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndAt</th>
+                <td>{{ salary.endAt ? salary.endAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Days</th>
+                <td>{{ salary.days }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ salary.amount }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ salary.createdAt ? salary.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('salary_index') }}">back to list</a>
+
+    <a href="{{ path('salary_edit', {'id': salary.id}) }}">edit</a>
+
+    {{ include('salary/_delete_form.html.twig') }}
+{% endblock %}

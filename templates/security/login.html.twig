@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}تسجيل الدخول{% endblock %}
+
+{% block login %}
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row" style="height: 500px;">
+                            <div class="col-lg-6" style="background: #e6effd;">
+                                <div class="p-5">
+                                    <form class="user" method="post">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">برنامج إدارة المعلمين النواب
+                                            </h1>
+                                            {{ include('/__inc/notification.html.twig') }}
+                                            {% if error %}
+                                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" value="{{ last_username }}"
+                                                   class="form-control form-control-user"
+                                                   placeholder="البريد الالكتروني" name="email" id="inputUsername"
+                                                   required autofocus>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                   name="password" id="inputPassword" required
+                                                   placeholder="كلمة المرور">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="" id="Check" name="_remember_me">
+                                                <label class="custom-control-label" for="Check">ذكرني</label>
+                                                <a href="{{ path('app_forgot_password_request') }}" class="float-left">نسيت
+                                                    كلمة المرور؟</a>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('authenticate') }}">
+                                        <input type="submit" class="btn btn-primary btn-user btn-block"
+                                               value="تسجيل الدخول">
+                                    </form>
+                                    {# <hr> #}
+                                    {# <a href="" #}
+                                    {# class="btn btn-outline-login btn-block"><i class="fab fa-google"></i> #}
+                                    {# تسجيل الدخول عبر Google </a> #}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

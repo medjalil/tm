@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <title>قائمة النيابات</title>
+    <style>
+        @media print {
+            .link {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: right;">
+    <div class="float-left">
+        {{ app.user.legation.region }} في :
+        <input type="text"
+               style="border:0;width:120px;direction: rtl;"
+               placeholder="أكتب التاريخ"
+               value="{{ "now"|date("Y/m/d") }}"
+        >
+    </div>
+    الجمهورية التونسية <br>
+    وزارة التربية<br>
+    {{ app.user.legation }}<br>
+    إدارة المرحلة الإبتدائية<br>
+</div>
+
+<div class="text-center mt-4">
+    <h2>
+        قائمة النيابات
+        {{ value }}
+    </h2>
+
+</div>
+<p class="text-center link">
+    <a href="javascript:window.print()">
+        <button class="btn btn-danger btn-lg">طباعة</button>
+    </a>
+</p>
+<table class="table table-striped mt-5">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>المعلم</th>
+        <th>المؤسسة</th>
+        <th>المعتمدية</th>
+        <th>النوع</th>
+        <th> الأشهر</th>
+        <th> الأيام</th>
+        <th>تاريخ البداية</th>
+        <th>تاريخ النهاية</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for mission in missions %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td> {{ mission.teacher.fullName }}</td>
+            <td>{{ mission.school }}</td>
+            <td>{{ mission.city }}</td>
+            <td>{{ mission.type ? 'شغور' : 'ظرفية' }}</td>
+            <td>{{ mission.newMonth }}</td>
+            <td>{{ mission.newDay }}</td>
+            <td>{{ mission.startAt ? mission.startAt|date('d/m/Y') : '' }}</td>
+            <td>{{ mission.endAt ? mission.endAt|date('d/m/Y') : 'لا يوجد' }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="9" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p class="text-center link">
+    <a href="javascript:window.print()">
+        <button class="btn btn-danger btn-lg">طباعة</button>
+    </a>
+</p>
+</body>
+</html>

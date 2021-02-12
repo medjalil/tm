@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block login %}
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row" style="height: 500px;">
+                            <div class="col-lg-6" style="background: #e6effd;">
+                                <div class="p-5 mt-5">
+                                    <h1>إعادة تعيين كلمة المرور</h1>
+                                    {% for flashError in app.flashes('reset_password_error') %}
+                                        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                                    {% endfor %}
+
+                                    {{ form_start(resetForm) }}
+                                    {{ form_row(resetForm.plainPassword) }}
+                                    <button class="btn btn-primary">إعادة التعيين</button>
+                                    {{ form_end(resetForm) }}
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

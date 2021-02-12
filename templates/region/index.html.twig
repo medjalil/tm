@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}قائمة الولايات{% endblock %}
+{% block title_header %}قائمة الولايات{% endblock %}
+
+{% block body %}
+    <a href="{{ path('region_new') }}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> إضافة ولاية </a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>اسم الولاية</th>
+            <th class="end-table"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for region in regions|sort|reverse %}
+            <tr>
+                <td>{{ region.name }}</td>
+                <td>
+                    <a href="{{ path('region_edit', {'id': region.id}) }}"><i class="fas fa-edit"
+                                                                              data-placement="top"
+                                                                              data-toggle="tooltip"
+                                                                              data-original-title="تعديل"></i></a>
+                    <a href="" data-toggle="modal" data-target="#deleteModal-{{ region.id }}"><i class="fas fa-trash"
+                                                                                                 data-toggle="tooltip"
+                                                                                                 data-placement="top"
+                                                                                                 title="حذف"></i></a>
+                </td>
+                {{ include('region/_delete_form.html.twig') }}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

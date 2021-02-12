@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}قائمة النيابات{% endblock %}
+{% block title_header %}قائمة النيابات{% endblock %}
+
+{% block body %}
+    <div class="clearfix">
+        {{ form(form) }}
+        <div class="row">
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-filter"></i>
+                    تصنيف
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ path('mission_index') }}">الكل</a>
+                    <a class="dropdown-item" href="{{ path('mission_index',{'filter':'شغور'}) }}">الشغور</a>
+                    <a class="dropdown-item" href="{{ path('mission_index',{'filter':'ظرفية'}) }}">الظرفية </a>
+                </div>
+            </div>
+            <div class="dropdown mr-2">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-print"></i>
+                    طباعة
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ path('mission_print',{'value':' '}) }}">الكل</a>
+                    <a class="dropdown-item" href="{{ path('mission_print',{'value':'الشغور'}) }}">الشغور</a>
+                    <a class="dropdown-item" href="{{ path('mission_print',{'value':'الظرفية'}) }}">الظرفية </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>المعلم</th>
+            <th>المؤسسة</th>
+            <th>المعتمدية</th>
+            <th>النوع</th>
+            <th> الأشهر</th>
+            <th> الأيام</th>
+            <th>تاريخ البداية</th>
+            <th>تاريخ النهاية</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for mission in missions|sort|reverse %}
+            <tr>
+                <td><a href="{{ path('teacher_show',{'id':mission.teacher.id}) }}"> {{ mission.teacher.fullName }}</a>
+                </td>
+                <td>{{ mission.school }}</td>
+                <td>{{ mission.city }}</td>
+                <td>{{ mission.type ? 'شغور' : 'ظرفية' }}</td>
+                <td>{{ mission.newMonth }}</td>
+                <td>{{ mission.newDay }}</td>
+                <td>{{ mission.startAt ? mission.startAt|date('Y/m/d') : '' }}</td>
+                <td>{{ mission.endAt ? mission.endAt|date('Y/m/d') : 'لا يوجد' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(missions) }}
+    </div>
+{% endblock %}

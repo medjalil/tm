@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+{% block title %}لوحة التحكم{% endblock %}
+{% block title_header %}لوحة التحكم{% endblock %}
+{% block body %}
+    {% if is_granted('ROLE_USER') %}
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="{{ path('teacher_index') }}" style="text-decoration: none;">
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">المعلمين النواب <i class="fas fa-user-tie fa-2x"></i></h5>
+                            <h1 class="display-4">{{ stats.teachers }} </h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ path('mission_index') }}" style="text-decoration: none;">
+                    <div class="card text-white bg-info">
+                        <div class="card-body">
+                            <h5 class="card-title"> النيابات <i class="fas fa-sync-alt fa-2x"></i></h5>
+                            <h1 class="display-4">{{ stats.missions }}</h1>
+                            <samp>شغور:{{ stats.mission1 }} | ظرفية:{{ stats.mission0 }}</samp>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ path('school_index') }}" style="text-decoration: none;">
+                    <div class="card text-white bg-danger">
+                        <div class="card-body">
+                            <h5 class="card-title">المؤسسات <i class="fas fa-university fa-2x"></i></h5>
+                            <h1 class="display-4">{{ stats.schools }}</h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ path('city_index') }}" style="text-decoration: none;">
+                    <div class="card text-white bg-success">
+                        <div class="card-body">
+                            <h5 class="card-title">المعتمديات <i class="fas fa-map-marker-alt fa-2x"></i></h5>
+                            <h1 class="display-4">{{ stats.cities }} </h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="{{ path('legation_index') }}" style="text-decoration: none;">
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">المندوبيات <i class="fas fa-building fa-2x"></i></h5>
+                            {# <h1 class="display-4">{{ legations|length }} </h1> #}
+                            <h1 class="display-4"></h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ path('user_index') }}" style="text-decoration: none;">
+                    <div class="card text-white bg-info">
+                        <div class="card-body">
+                            <h5 class="card-title"> المستخدمين <i class="fas fa-users fa-2x"></i></h5>
+                            {# <h1 class="display-4">{{ users|length }}</h1> #}
+                            <h1 class="display-4"></h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ path('subscription_index') }}" style="text-decoration: none;">
+                    <div class="card text-white bg-danger">
+                        <div class="card-body">
+                            <h5 class="card-title">الإشتراكات <i class="fas fa-calendar-check fa-2x"></i></h5>
+                            {# <h1 class="display-4">{{ subscriptions|length }}</h1> #}
+                            <h1 class="display-4"></h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ path('offer_index') }}" style="text-decoration: none;">
+                    <div class="card text-white bg-success">
+                        <div class="card-body">
+                            <h5 class="card-title">العروض <i class="fas fa-store fa-2x"></i></h5>
+                            {# <h1 class="display-4">{{ offers|length }} </h1> #}
+                            <h1 class="display-4"></h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+    <hr>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}معطيات الحساب{% endblock %}
+{% block title_header %}معطيات الحساب{% endblock %}
+
+{% block body %}
+    <ul>
+        <li><b>الاسم و اللقب</b> : {{ app.user.fullName }}</li>
+        <li><b>البريد الالكتروني </b> : {{ app.user.email }}</li>
+        <li><b>الهاتف الجوال</b> : {{ app.user.mobile|default('لايوجد') }}</li>
+    </ul>
+
+{% endblock %}
