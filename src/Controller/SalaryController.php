@@ -6,7 +6,9 @@ use App\Entity\Mission;
 use App\Entity\Salary;
 use App\Entity\Teacher;
 use App\Form\SalaryType;
+use App\Form\SearchFormType;
 use App\Repository\SalaryRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,12 +23,27 @@ class SalaryController extends AbstractController
     /**
      * @Route("/", name="salary_index", methods={"GET","POST"})
      * @param SalaryRepository $salaryRepository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(SalaryRepository $salaryRepository): Response
+    public function index(SalaryRepository $salaryRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $form = $this->createForm(SearchFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $criteria = $form->get('search')->getData() ?? '';
+            $results = $salaryRepository->findTeacherBySalary($criteria);
+        } else {
+            $results = $salaryRepository->findby([], ['id' => 'DESC']);
+        }
+
+        $salaries = $paginator->paginate($results, $request->query->getInt('page', 1), 10);
+
         return $this->render('salary/index.html.twig', [
-            'salaries' => $salaryRepository->findAll(),
+            'salaries' => $salaries,
+            'form' => $form->createView()
         ]);
     }
 

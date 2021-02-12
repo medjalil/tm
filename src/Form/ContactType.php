@@ -14,12 +14,16 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('subject', TextType::class, [
-                'label' => 'الموضوع'
+                'label' => 'الموضوع',
+                'attr' => [
+                    'placeholder' => 'يمكنك كتابة الموضوع هنا..'
+                ]
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'الرسالة',
                 'attr' => [
-                    'rows' => 5
+                    'rows' => 5,
+                    'placeholder' => 'نص المراسلة..'
                 ]
             ]);
     }

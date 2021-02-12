@@ -64,7 +64,7 @@ class ArchiveController extends AbstractController
             $entityManager->persist($archive);
             $entityManager->flush();
 
-            $this->addFlash('success', ' تم نقل الأستاذ إلى الأرشيف');
+            $this->addFlash('success', ' تم نقل المعلم إلى الأرشيف');
             return $this->redirectToRoute('archive_index');
         }
 
@@ -75,40 +75,6 @@ class ArchiveController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="archive_show", methods={"GET"})
-     * @param Archive $archive
-     * @return Response
-     */
-    public function show(Archive $archive): Response
-    {
-        return $this->render('archive/show.html.twig', [
-            'archive' => $archive,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="archive_edit", methods={"GET","POST"})
-     * @param Request $request
-     * @param Archive $archive
-     * @return Response
-     */
-    public function edit(Request $request, Archive $archive): Response
-    {
-        $form = $this->createForm(ArchiveType::class, $archive);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('archive_index');
-        }
-
-        return $this->render('archive/edit.html.twig', [
-            'archive' => $archive,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="archive_delete", methods={"DELETE"})
@@ -125,7 +91,7 @@ class ArchiveController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($archive);
             $entityManager->flush();
-            $this->addFlash('success', ' تم نقل الأستاذ إلى القائمة الرئيسية');
+            $this->addFlash('success', ' تم نقل المعلم إلى القائمة ');
         }
 
         return $this->redirectToRoute('teacher_index');

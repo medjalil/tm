@@ -59,11 +59,11 @@
                 <td>{{ mission.newMonth }}</td>
                 <td>{{ mission.newDay }}</td>
                 <td>{{ mission.startAt ? mission.startAt|date('Y/m/d') : '' }}</td>
-                <td>{{ mission.endAt ? mission.endAt|date('Y/m/d') : 'لا يوجد' }}</td>
+                <td>{{ mission.endAt ? mission.endAt|date('Y/m/d') : '' }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+                <td colspan="8" class="table-secondary text-center text-gray-800">لا يوجد سجلات!</td>
             </tr>
         {% endfor %}
         </tbody>

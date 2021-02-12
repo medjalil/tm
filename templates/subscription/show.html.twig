@@ -7,22 +7,22 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ subscription.id }}</td>
-            </tr>
-            <tr>
-                <th>StartAt</th>
-                <td>{{ subscription.startAt ? subscription.startAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EndAt</th>
-                <td>{{ subscription.endAt ? subscription.endAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ subscription.createdAt ? subscription.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ subscription.id }}</td>
+        </tr>
+        <tr>
+            <th>StartAt</th>
+            <td>{{ subscription.startAt ? subscription.startAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>EndAt</th>
+            <td>{{ subscription.endAt ? subscription.endAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>CreatedAt</th>
+            <td>{{ subscription.createdAt ? subscription.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
         </tbody>
     </table>
 
@@ -30,5 +30,5 @@
 
     <a href="{{ path('subscription_edit', {'id': subscription.id}) }}">edit</a>
 
-    {{ include('subscription/_delete_form.html.twig') }}
+    {{ include('subscription/_toliste.html.twig') }}
 {% endblock %}

@@ -45,20 +45,12 @@
                 <td>{{ restDay }}</td>
                 <td>{{ teacher.city }}</td>
                 <td>
-                    <a href="{{ path('teacher_edit', {'id': teacher.id}) }}"><i class="fas fa-edit"
-                                                                                data-placement="top"
-                                                                                data-toggle="tooltip"
-                                                                                data-original-title="تعديل"></i></a>
-                    <a href="" data-toggle="modal" data-target="#deleteModal-{{ teacher.id }}"><i class="fas fa-trash"
-                                                                                                  data-toggle="tooltip"
-                                                                                                  data-placement="top"
-                                                                                                  title="حذف"></i></a>
+                    {% include 'option/_option.html.twig' with { _pathEdit: 'teacher_edit', _pathDelete: 'teacher_delete', id: teacher.id} %}
                 </td>
-                {{ include('teacher/_delete_form.html.twig') }}
             </tr>
         {% else %}
             <tr>
-                <td colspan="8" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+                <td colspan="8" class="table-secondary text-center text-gray-800">لا يوجد سجلات!</td>
             </tr>
         {% endfor %}
         </tbody>

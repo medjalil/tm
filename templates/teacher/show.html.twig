@@ -75,6 +75,7 @@
         </tr>
         </tbody>
     </table>
+
     {% if(teacher.archived == false) %}
         <a href="{{ path('teacher_index') }}" class="btn btn-info"><i class="fas fa-angle-right"></i> العودة إلى القائمة
         </a>
@@ -85,8 +86,6 @@
         <a href="{{ path('teacher_edit', {'id': teacher.id}) }}" class="btn btn-primary float-left mr-2"><i
                     class="fas fa-edit"></i> تعديل
             المعطيات </a>
-    {% endif %}
-    {% if teacher.archived == false %}
         <a href="{{ path('archive_new',{'id':teacher.id}) }}" class="btn btn-dark"><i class="fas fa-box"></i>
             تحويل إلى الأرشيف
         </a>
@@ -96,7 +95,7 @@
                     class="fas fa-box"></i>
             الخروج من الأرشيف
         </a>
-        {{ include('archive/_delete_form.html.twig') }}
+        {{ include('archive/_toliste.html.twig') }}
     {% endif %}
     <hr>
 

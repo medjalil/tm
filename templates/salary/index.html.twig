@@ -4,35 +4,38 @@
 {% block title_header %}قائمة الأجور {% endblock %}
 
 {% block body %}
+    <div class="clearfix">
+        {{ form(form) }}
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>StartAt</th>
-            <th>EndAt</th>
-            <th>Days</th>
-            <th>Amount</th>
-            <th>CreatedAt</th>
-            <th></th>
+            <th>المعلم</th>
+            <th>تاريخ البداية</th>
+            <th>تاريخ النهاية</th>
+            <th>الأيام</th>
+            <th>المبلغ</th>
         </tr>
         </thead>
         <tbody>
         {% for salary in salaries %}
             <tr>
-                <td>{{ salary.mission.teacher }}</td>
-                <td>{{ salary.startAt ? salary.startAt|date('Y-m-d') : '' }}</td>
-                <td>{{ salary.endAt ? salary.endAt|date('Y-m-d') : '' }}</td>
-                <td>{{ salary.days }}</td>
-                <td>{{ salary.amount }}</td>
-                <td>{{ salary.createdAt ? salary.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('salary_edit', {'id': salary.id}) }}">edit</a>
+                    <a href="{{ path('teacher_show',{'id': salary.mission.teacher.id}) }}">{{ salary.mission.teacher }}</a>
                 </td>
+                <td>{{ salary.startAt ? salary.startAt|date('Y/m/d') : '' }}</td>
+                <td>{{ salary.endAt ? salary.endAt|date('Y/m/d') : '' }}</td>
+                <td>{{ salary.days }}</td>
+                <td>{{ salary.amount }} دينار</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="5" class="table-secondary text-center text-gray-800">لا يوجد سجلات!</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(salaries) }}
+    </div>
 {% endblock %}

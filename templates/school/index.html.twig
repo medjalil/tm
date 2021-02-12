@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}قائمة المؤسسات العمومية{% endblock %}
-{% block title_header %}قائمة المؤسسات العمومية{% endblock %}
+{% block title %}قائمة المؤسسات {% endblock %}
+{% block title_header %}قائمة المؤسسات {% endblock %}
 
 {% block body %}
     <div class="clearfix">
@@ -27,7 +27,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+                <td colspan="3" class="table-striped text-center text-gray-800">لا يوجد سجلات!</td>
             </tr>
         {% endfor %}
         </tbody>

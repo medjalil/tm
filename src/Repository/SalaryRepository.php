@@ -19,32 +19,21 @@ class SalaryRepository extends ServiceEntityRepository
         parent::__construct($registry, Salary::class);
     }
 
-    // /**
-    //  * @return Salary[] Returns an array of Salary objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Salary
+    /**
+     * @param string $q
+     * @return Salary[]
+     */
+
+    public function findTeacherBySalary(string $q)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
+            ->join('s.mission', 'm')
+            ->join('m.teacher', 't')
+            ->andWhere('t.fullName LIKE :val')
+            ->setParameter('val', '%' . $q . '%')
+            ->orderBy('s.id', 'DESC')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }
