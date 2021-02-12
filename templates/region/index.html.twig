@@ -17,20 +17,12 @@
             <tr>
                 <td>{{ region.name }}</td>
                 <td>
-                    <a href="{{ path('region_edit', {'id': region.id}) }}"><i class="fas fa-edit"
-                                                                              data-placement="top"
-                                                                              data-toggle="tooltip"
-                                                                              data-original-title="تعديل"></i></a>
-                    <a href="" data-toggle="modal" data-target="#deleteModal-{{ region.id }}"><i class="fas fa-trash"
-                                                                                                 data-toggle="tooltip"
-                                                                                                 data-placement="top"
-                                                                                                 title="حذف"></i></a>
+                    {% include 'option/_option.html.twig' with { _pathEdit: 'region_edit', _pathDelete: 'region_delete', id: region.id} %}
                 </td>
-                {{ include('region/_toliste.html.twig') }}
             </tr>
         {% else %}
             <tr>
-                <td colspan="2" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
+                <td colspan="2" class="table-secondary text-center text-gray-800">لا يوجد سجلات!</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -7,6 +7,7 @@ use App\Entity\Legation;
 use App\Entity\Subscription;
 use App\Repository\LegationRepository;
 use App\Repository\SubscriptionRepository;
+use DateTimeInterface;
 
 class Info
 {
@@ -33,6 +34,15 @@ class Info
         return $legation;
     }
 
+    public function getRegion(): string
+    {
+        /** @var Legation $legation */
+        $legation = $this->legation->findOneBy(['id' => 1]);
+        /** @var string $region */
+        $region = $legation->getRegion();
+        return $region;
+    }
+
     public function getOffer(): string
     {
         /** @var Subscription $last */
@@ -42,12 +52,13 @@ class Info
         return $offer;
     }
 
-    public function getRegion(): string
+    public function getSubscription(): DateTimeInterface
     {
-        /** @var Legation $legation */
-        $legation = $this->legation->findOneBy(['id' => 1]);
-        /** @var string $region */
-        $region = $legation->getRegion();
-        return $region;
+        /** @var Subscription $last */
+        $last = $this->subscriptionRepository->findOneBy([], ['id' => 'DESC']);
+        /** @var DateTimeInterface $endAt */
+        $endAt = $last->getEndAt();
+        return $endAt;
     }
+
 }

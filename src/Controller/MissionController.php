@@ -140,12 +140,11 @@ class MissionController extends AbstractController
 
     /**
      * @Route ("/print/{value}", name="mission_print", methods={"GET"}, priority=2)
-     * @param Request $request
      * @param MissionRepository $missionRepository
-     * @param $value
+     * @param string $value
      * @return Response
      */
-    public function  print(Request $request, MissionRepository $missionRepository, $value): Response
+    public function  print(MissionRepository $missionRepository, string $value): Response
     {
         if ($value === 'الظرفية') {
             $missions = $missionRepository->findBy(['type' => '0'], ['id' => 'DESC']);
