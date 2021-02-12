@@ -13,21 +13,23 @@
             <i class="fas fa-fw fa-home"></i>
             <span>لوحة التحكم</span></a>
     </li>
-    {% if is_granted("ROLE_USER") %}
-        <hr class="sidebar-divider">
-        <div class="sidebar-heading">
-            معطيات أساسية
-        </div>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('city_index') }}">
-                <i class="fas fa-fw fa-map-marker-alt"></i>
-                <span>المعتمديات</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('school_index') }}">
-                <i class="fas fa-fw fa-university"></i>
-                <span>المؤسسات </span></a>
-        </li>
+    {% if not is_granted("ROLE_ADMIN") %}
+        {% if is_granted("ROLE_MANGER") %}
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                معطيات أساسية
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('city_index') }}">
+                    <i class="fas fa-fw fa-map-marker-alt"></i>
+                    <span>المعتمديات</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('school_index') }}">
+                    <i class="fas fa-fw fa-university"></i>
+                    <span>المؤسسات </span></a>
+            </li>
+        {% endif %}
         <hr class="sidebar-divider">
         <div class="sidebar-heading">
             إدارة المعطيات
@@ -42,11 +44,13 @@
                 <i class="fas fa-fw fa-sync-alt"></i>
                 <span>النيابات</span></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('salary_index') }}">
-                <i class="fas fa-fw fa-credit-card"></i>
-                <span>الأجور</span></a>
-        </li>
+        {% if is_granted('ROLE_ACCOUNT') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('salary_index') }}">
+                    <i class="fas fa-fw fa-credit-card"></i>
+                    <span>الأجور</span></a>
+            </li>
+        {% endif %}
         <li class="nav-item">
             <a class="nav-link" href="{{ path('archive_index') }}">
                 <i class="fas fa-fw fa-archive"></i>
@@ -61,8 +65,7 @@
                 <i class="fas fa-fw fa-envelope"></i>
                 <span>إتصل بنا</span></a>
         </li>
-    {% endif %}
-    {% if is_granted("ROLE_ADMIN") %}
+    {% elseif is_granted("ROLE_ADMIN") %}
         <hr class="sidebar-divider">
         <div class="sidebar-heading">
             معطيات أساسية
@@ -72,8 +75,6 @@
                 <i class="fas fa-fw fa-map-marked"></i>
                 <span>الولايات</span></a>
         </li>
-    {% endif %}
-    {% if is_granted("ROLE_ADMIN") %}
         <hr class="sidebar-divider">
         <div class="sidebar-heading">
             إدارة الحسابات

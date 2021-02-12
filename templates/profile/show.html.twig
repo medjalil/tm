@@ -8,6 +8,8 @@
         <li><b>الاسم و اللقب</b> : {{ app.user.fullName }}</li>
         <li><b>البريد الالكتروني </b> : {{ app.user.email }}</li>
         <li><b>الهاتف الجوال</b> : {{ app.user.mobile|default('لايوجد') }}</li>
-        <li><b>تاريخ نهاية الإشتراك</b> : {{ info.subscription|date('Y/m/d') }}</li>
+        {% if not is_granted('ROLE_ADMIN') %}
+            <li><b>تاريخ نهاية الإشتراك</b> : {{ info.subscription|date('Y/m/d') }}</li>
+        {% endif %}
     </ul>
 {% endblock %}

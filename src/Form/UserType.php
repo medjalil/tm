@@ -38,9 +38,9 @@ class UserType extends AbstractType
                     'multiple' => true,
                     'expanded' => false,
                     'choices' => [
-                        'الإدارة' => 'ROLE_USER',
-                        'المالية' => 'ROLE_FINANCE',
-                        'المشاهدة' => 'ROLE_CONSULT'
+                        'الإدارة' => 'ROLE_MANGER',
+                        'المالية' => 'ROLE_ACCOUNT',
+                        'المشاهدة' => 'ROLE_WATCH'
                     ]
                 ]);
 

@@ -41,15 +41,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * @param string $role
      * @return array
      */
-    public function findUserByNotRole(string $role): array
+    public function findUserNotAdmin(): array
     {
-        $role = mb_strtoupper($role);
         return $this->createQueryBuilder('u')
             ->andWhere('u.roles <> :role')
-            ->setParameter('role', $role)
+            ->setParameter('role', '["ROLE_ADMIN"]')
             ->getQuery()
             ->getResult();
     }

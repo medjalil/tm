@@ -58,15 +58,11 @@ class PageController extends AbstractController
         $mission0 = count($missionRepository->countMissionsByType(false));
         $mission1 = count($missionRepository->countMissionsByType(true));
         $missions = $mission0 + $mission1;
-//        $users = count($userRepository->findByRole('ROLE_USER'));
-//        $subscriptions = count($subscriptionRepository->findAll());
-//        $offers = count($offerRepository->findAll());
-
+        $users = count($userRepository->findUserNotAdmin());
+        $subscriptions = count($subscriptionRepository->findAll());
+        $offers = count($offerRepository->findAll());
         return $this->render('page/dashboard.html.twig', [
-            'stats' => compact('cities', 'schools', 'teachers', 'missions', 'mission0', 'mission1'),
-//            'users' => $users,
-//            'subscriptions' => $subscriptions,
-//            'offers' => $offers,
+            'stats' => compact('cities', 'schools', 'teachers', 'missions', 'mission0', 'mission1', 'users', 'subscriptions', 'offers')
         ]);
     }
 

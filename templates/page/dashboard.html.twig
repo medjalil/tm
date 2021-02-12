@@ -2,7 +2,7 @@
 {% block title %}لوحة التحكم{% endblock %}
 {% block title_header %}لوحة التحكم{% endblock %}
 {% block body %}
-    {% if is_granted('ROLE_USER') %}
+    {% if not is_granted('ROLE_ADMIN') %}
         <div class="row">
             <div class="col-sm-3">
                 <a href="{{ path('teacher_index') }}" style="text-decoration: none;">
@@ -46,15 +46,14 @@
                 </a>
             </div>
         </div>
-    {% else %}
+    {% elseif is_granted('ROLE_ADMIN') %}
         <div class="row">
             <div class="col-sm-3">
                 <a href="{{ path('user_index') }}" style="text-decoration: none;">
                     <div class="card text-white bg-info">
                         <div class="card-body">
                             <h5 class="card-title"> المستخدمين <i class="fas fa-users fa-2x"></i></h5>
-                            {# <h1 class="display-4">{{ users|length }}</h1> #}
-                            <h1 class="display-4"></h1>
+                            <h1 class="display-4">{{ stats.users }}</h1>
                         </div>
                     </div>
                 </a>
@@ -64,8 +63,7 @@
                     <div class="card text-white bg-danger">
                         <div class="card-body">
                             <h5 class="card-title">الإشتراكات <i class="fas fa-calendar-check fa-2x"></i></h5>
-                            {# <h1 class="display-4">{{ subscriptions|length }}</h1> #}
-                            <h1 class="display-4"></h1>
+                            <h1 class="display-4">{{ stats.subscriptions }}</h1>
                         </div>
                     </div>
                 </a>
@@ -75,8 +73,7 @@
                     <div class="card text-white bg-success">
                         <div class="card-body">
                             <h5 class="card-title">العروض <i class="fas fa-store fa-2x"></i></h5>
-                            {# <h1 class="display-4">{{ offers|length }} </h1> #}
-                            <h1 class="display-4"></h1>
+                            <h1 class="display-4">{{ stats.offers }} </h1>
                         </div>
                     </div>
                 </a>
