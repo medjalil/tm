@@ -29,13 +29,15 @@ class ChangePasswordFormType extends AbstractType
                     ],
                     'label' => false,
                     'attr' => [
-                        'placeholder' => 'كلمة المرور الجديدة'
+                        'placeholder' => 'كلمة المرور الجديدة',
+                        'class' => 'form-control form-control-user'
                     ]
                 ],
                 'second_options' => [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => 'تأكيد كلمة المرور الجديدة'
+                        'placeholder' => 'تأكيد كلمة المرور الجديدة',
+                        'class' => 'form-control form-control-user'
                     ]
                 ],
                 // 'invalid_message' => 'The password fields must match.',

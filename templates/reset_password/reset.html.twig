@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}إعادة تعيين كلمة المرور{% endblock %}
 
 {% block login %}
     <div class="container">
@@ -13,16 +13,21 @@
                         <div class="row" style="height: 500px;">
                             <div class="col-lg-6" style="background: #e6effd;">
                                 <div class="p-5 mt-5">
-                                    <h1>إعادة تعيين كلمة المرور</h1>
-                                    {% for flashError in app.flashes('reset_password_error') %}
-                                        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-                                    {% endfor %}
-
-                                    {{ form_start(resetForm) }}
-                                    {{ form_row(resetForm.plainPassword) }}
-                                    <button class="btn btn-primary">إعادة التعيين</button>
-                                    {{ form_end(resetForm) }}
-
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">إعادة تعيين كلمة المرور</h1>
+                                        {% for flashError in app.flashes('reset_password_error') %}
+                                            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                                        {% endfor %}
+                                        {{ form_start(resetForm) }}
+                                        {{ form_row(resetForm.plainPassword) }}
+                                        <input type="submit" class="btn btn-primary btn-user btn-block mt-3"
+                                               value="إعادة التعيين">
+                                        {{ form_end(resetForm) }}
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a href="{{ path('app_login') }}">العودة إلى تسجيل الدخول</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>

@@ -1,19 +1,11 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
-
-// any CSS you import will output into a single css file (app.css in this case)
+// import files
 import './styles/app.css';
-
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
 import 'bootstrap';
 import '@fortawesome/fontawesome-free/js/all.js';
 
 require("bootstrap-datepicker");
+// translate datepiker to ar-TN
 $.fn.datepicker.dates["ar-tn"] = {
     days: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"],
     daysShort: ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت", "أحد"],
@@ -23,30 +15,32 @@ $.fn.datepicker.dates["ar-tn"] = {
     today: "هذا اليوم",
     rtl: !0
 };
-
+//  enable datepiker
 $('.datepicker').datepicker({
     format: 'yyyy/mm/dd',
     language: 'ar-tn',
     autoclose: true,
 });
+// enable tooltip
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+// add class css to element
 $('form[name="search_form"]').addClass("float-left col-md-3");
 $('form[name="reset_password_request_form"]').addClass("user");
-// Javascript to enable link to tab
-var url = document.location.toString();
+$('form[name="change_password_form"]').addClass("user");
+// enable link to tab
+let url = document.location.toString();
 if (url.match('#')) {
     $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
 }
-
 // Change hash for page-reload
 $('.nav-tabs a').on('shown.bs.tab', function (e) {
     window.location.hash = e.target.hash;
 })
-
+// javascript for theme
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
-$(function () {
-    "use strict"; // Start of use strict
+    "use strict";
     if (localStorage.getItem("toggled") === "close") {
         $("body").toggleClass("sidebar-toggled");
         $(".sidebar").toggleClass("toggled");
@@ -63,23 +57,18 @@ $(function () {
 
         }
     });
-
     // Close any open menu accordions when window is resized below 768px
     $(window).resize(function () {
         if ($(window).width() < 768) {
             $('.sidebar .collapse').collapse('hide');
         }
-
-
         // Toggle the side navigation when window is resized below 480px
         if ($(window).width() < 480 && !$(".sidebar").hasClass("toggled")) {
             $("body").addClass("sidebar-toggled");
             $(".sidebar").addClass("toggled");
             $('.sidebar .collapse').collapse('hide');
         }
-
     });
-
     // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
     $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
         if ($(window).width() > 768) {
@@ -89,7 +78,6 @@ $(function () {
             e.preventDefault();
         }
     });
-
     // Scroll to top button appear
     $(document).on('scroll', function () {
         var scrollDistance = $(this).scrollTop();
@@ -99,7 +87,6 @@ $(function () {
             $('.scroll-to-top').fadeOut();
         }
     });
-
     // Smooth scrolling using jQuery easing
     $(document).on('click', 'a.scroll-to-top', function (e) {
         var $anchor = $(this);
@@ -108,5 +95,4 @@ $(function () {
         }, 1000, 'easeInOutExpo');
         e.preventDefault();
     });
-
-}); // End of use strict
+});
