@@ -18,22 +18,16 @@
                                         {% for flashError in app.flashes('reset_password_error') %}
                                             <div class="alert alert-danger" role="alert">{{ flashError }}</div>
                                         {% endfor %}
-
                                         {{ form_start(requestForm) }}
                                         {{ form_widget(requestForm.email) }}
-
-
                                         <input type="submit" class="btn btn-primary btn-user btn-block mt-3"
                                                value="إرسال إعادة تعيين كلمة المرور">
-
                                         {{ form_end(requestForm) }}
                                     </div>
                                     <hr>
-
                                     <div class="text-center">
                                         <a href="{{ path('app_login') }}">العودة إلى تسجيل الدخول</a>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
