@@ -41,33 +41,38 @@
                                                                                data-toggle="tooltip"
                                                                                data-placement="top"
                                                                                title="طباعة"></i>
+                        {% if is_granted("ROLE_ACCOUNT") %}
                     </a><a href="{{ path('salary_new',{'id': mission.id}) }}"><i class="fas fa-credit-card"
                                                                                  data-toggle="tooltip"
                                                                                  data-placement="top"
                                                                                  title="تأجير"></i>
                     </a>
+                    {% endif %}
                 </td>
             {% endif %}
             {{ include('mission/_delete_form.html.twig') }}
         </tr>
-        {% for salary in mission.salaries %}
-            <tr class="table-lk">
-                <td> تاريخ البداية:{{ salary.startAt|date('d/m/Y') }}</td>
-                <td colspan="2"> تاريخ النهاية:{{ salary.endAt|date('d/m/Y') }}</td>
-                <td colspan="2"> عدد الأيام المنجزة:{{ salary.days }}</td>
-                <td colspan="2"> المبلغ:{{ salary.amount }} دينار</td>
-                <td>
-                    <a href="{{ path('salary_edit', {'id': salary.id}) }}"><i class="fas fa-edit"
-                                                                              data-toggle="tooltip"
-                                                                              data-original-title="تعديل"></i></a>
-                    <a href="" data-toggle="modal" data-target="#deleteModal-{{ salary.id }}"><i class="fas fa-trash"
-                                                                                                 data-toggle="tooltip"
-                                                                                                 data-placement="top"
-                                                                                                 title="حذف"></i></a>
-                </td>
-                {{ include('salary/_delete_form.html.twig') }}
-            </tr>
-        {% endfor %}
+        {% if is_granted("ROLE_ACCOUNT") %}
+            {% for salary in mission.salaries %}
+                <tr class="table-lk">
+                    <td> تاريخ البداية:{{ salary.startAt|date('d/m/Y') }}</td>
+                    <td colspan="2"> تاريخ النهاية:{{ salary.endAt|date('d/m/Y') }}</td>
+                    <td colspan="2"> عدد الأيام المنجزة:{{ salary.days }}</td>
+                    <td colspan="2"> المبلغ:{{ salary.amount }} دينار</td>
+                    <td>
+                        <a href="{{ path('salary_edit', {'id': salary.id}) }}"><i class="fas fa-edit"
+                                                                                  data-toggle="tooltip"
+                                                                                  data-original-title="تعديل"></i></a>
+                        <a href="" data-toggle="modal" data-target="#deleteModal-{{ salary.id }}"><i
+                                    class="fas fa-trash"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="حذف"></i></a>
+                    </td>
+                    {{ include('salary/_delete_form.html.twig') }}
+                </tr>
+            {% endfor %}
+        {% endif %}
     {% else %}
         <tr>
             <td colspan="8" class="table-danger text-center text-danger">لا يوجد سجلات!</td>
